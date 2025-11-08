@@ -3,4 +3,5 @@
 .active {
   text-decoration: underline;
   color: blueviolet;
+  font-weight: bold;
 }
