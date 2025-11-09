@@ -10,7 +10,7 @@ const TopArtists = () => {
     axiosInstance.get("/arts/topartists").then((res) => {
       setTopartists(res.data);
     });
-  }, [topArtists]);
+  }, []);
 
   return (
     <div className="bg-base-200 text-base-content rounded-2xl shadow-lg p-6 transition-colors duration-300 max-w-[80%] mx-auto mb-9">

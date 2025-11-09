@@ -1,24 +1,41 @@
 import React, { useContext } from "react";
 import { AuthContex } from "../../contexts/AuthContex";
+import useAxios from "../../hooks/useAxios";
+
+import { toast, ToastContainer } from "react-toastify";
 
 const AddArtWork = () => {
   const { user } = useContext(AuthContex);
+  const axiosInstanse = useAxios();
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
-    const formData = {
+    const newArt = {
+      artistImageURL: user.photoURL,
       imageURL: form.imageURL.value,
       title: form.title.value,
       category: form.category.value,
       medium: form.medium.value,
       description: form.description.value,
       dimensions: form.dimensions.value,
-      price: form.price.value,
+      price: form.price.value || 0,
+      likes: 0,
       visibility: form.visibility.value,
-      userName: form.userName.value,
+      artistName: form.userName.value,
       userEmail: form.userEmail.value,
     };
-    console.log("Form Data:", formData);
+    axiosInstanse.post("/add-art", newArt).then((res) => {
+      toast.success("successfully added ", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    });
   };
 
   return (
@@ -30,12 +47,12 @@ const AddArtWork = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label className="block font-medium mb-2">Image URL</label>
-              <input name="imageURL" type="text" placeholder="Enter artwork image URL" className="input input-bordered w-full" />
+              <input required name="imageURL" type="text" placeholder="Enter artwork image URL" className="input input-bordered w-full" />
             </div>
 
             <div>
               <label className="block font-medium mb-2">Title</label>
-              <input name="title" required type="text" placeholder="Enter artwork title" className="input input-bordered w-full" />
+              <input required name="title" type="text" placeholder="Enter artwork title" className="input input-bordered w-full" />
             </div>
 
             <div>
@@ -58,7 +75,7 @@ const AddArtWork = () => {
 
             <div>
               <label className="block font-medium mb-2">Description</label>
-              <textarea name="description" rows="4" placeholder="Describe your artwork" className="textarea textarea-bordered w-full" />
+              <textarea required name="description" rows="4" placeholder="Describe your artwork" className="textarea textarea-bordered w-full" />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -83,11 +100,11 @@ const AddArtWork = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block font-medium mb-2">User Name</label>
-                <input name="userName" type="text" value={user.displayName} readOnly className="input input-bordered w-full bg-gray-100 cursor-not-allowed" />
+                <input name="userName" type="text" value={user.displayName} readOnly className="input input-bordered text-base-400 w-full bg-base-100 cursor-not-allowed" />
               </div>
               <div>
                 <label className="block font-medium mb-2">User Email</label>
-                <input name="userEmail" type="email" value={user.email} readOnly className="input input-bordered w-full bg-gray-100 cursor-not-allowed" />
+                <input name="userEmail" type="email" value={user.email} readOnly className="input input-bordered w-full text-base-400 bg-base-100 cursor-not-allowed" />
               </div>
             </div>
 
@@ -99,6 +116,7 @@ const AddArtWork = () => {
           </form>
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"></ToastContainer>
     </div>
   );
 };

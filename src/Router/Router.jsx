@@ -8,6 +8,9 @@ import PrivateRoute from "../privateRoute/PrivateRoute";
 import ArtworkDetail from "../components/ArtworkDetails/ArtworkDetails";
 import ArtworkDetailSkeleton from "../components/ArtworkDetails/ArtworkDetailSkeleton";
 import AddArtWork from "../components/AddArtWork/AddArtWork";
+import AllartWork from "../components/AllartWork/AllartWork";
+import LoadingPage from "../components/LoadingPage/LoadingPage";
+import GalleryPage from "../components/GalleryPage/GalleryPage";
 
 export const router = createBrowserRouter([
   {
@@ -35,13 +38,27 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) => fetch(`${import.meta.env.VITE_Base_Url}/arts/${params.id}`),
-        hydrateFallbackElement: <ArtworkDetailSkeleton></ArtworkDetailSkeleton>,
+        hydrateFallbackElement: <LoadingPage></LoadingPage>,
       },
       {
         path: "/add-artwork",
         element: (
           <PrivateRoute>
             <AddArtWork></AddArtWork>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/explore",
+        Component: AllartWork,
+        loader: () => fetch(`${import.meta.env.VITE_Base_Url}/allarts`),
+        hydrateFallbackElement: <LoadingPage></LoadingPage>,
+      },
+      {
+        path: "/gallery",
+        element: (
+          <PrivateRoute>
+            <GalleryPage></GalleryPage>
           </PrivateRoute>
         ),
       },
