@@ -5,6 +5,7 @@ import { AuthContex } from "../../contexts/AuthContex";
 import { Heart } from "lucide-react";
 import Loading from "../LoadingPage/LoadingPage";
 import { Link, Navigate } from "react-router";
+import { Fade } from "react-awesome-reveal";
 
 const GalleryPage = () => {
   const { user } = useContext(AuthContex);
@@ -43,7 +44,7 @@ const GalleryPage = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axiosInstance.delete(`/delete-art/${artId}`);
+          await axiosInstance.delete(`/delete-art/${artId}`).then((res) => console.log(res));
           Swal.fire("Deleted!", "Artwork has been deleted.", "success");
           fetchArtworks();
         } catch (err) {
@@ -112,42 +113,44 @@ const GalleryPage = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {artworks.map((art) => (
-            <div key={art._id} className="relative card bg-base-300 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex flex-col">
-              <figure className="relative overflow-hidden">
-                <img src={art.imageURL} alt={art.title} className="w-full h-64 object-cover transition-transform duration-500 hover:scale-105" />
-                <div className="absolute top-3 right-3">
-                  <button className="btn btn-circle btn-sm bg-base-100/80 backdrop-blur-sm border-0 hover:scale-110 transition-transform duration-200">
-                    <Heart className="w-4 h-4" />
-                  </button>
-                </div>
-              </figure>
-              <div className="card-body p-4 flex-1">
-                <h3 className="card-title text-lg font-bold line-clamp-1">{art.title}</h3>
-                <div className="flex items-center gap-2 mt-2">
-                  <div className="avatar">
-                    <div className="w-6 h-6 rounded-full">
-                      <img src={art.artistImageURL} alt={art.artistName} />
+            <Fade>
+              <div key={art._id} className="relative card bg-base-300 shadow-xl transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl flex flex-col">
+                <figure className="relative overflow-hidden">
+                  <img src={art.imageURL} alt={art.title} className="w-full h-64 object-cover transition-transform duration-500 hover:scale-105" />
+                  <div className="absolute top-3 right-3">
+                    <button className="btn btn-circle btn-sm bg-base-100/80 backdrop-blur-sm border-0 hover:scale-110 transition-transform duration-200">
+                      <Heart className="w-4 h-4" />
+                    </button>
+                  </div>
+                </figure>
+                <div className="card-body p-4 flex-1">
+                  <h3 className="card-title text-lg font-bold line-clamp-1">{art.title}</h3>
+                  <div className="flex items-center gap-2 mt-2">
+                    <div className="avatar">
+                      <div className="w-6 h-6 rounded-full">
+                        <img src={art.artistImageURL} alt={art.artistName} />
+                      </div>
+                    </div>
+                    <span className="text-sm text-base-content/70">{art.artistName}</span>
+                  </div>
+                  <div className="flex items-center justify-between mt-2">
+                    <div className="badge badge-outline badge-primary">{art.category}</div>
+                    <div className="flex items-center gap-1 text-sm text-base-content/60">
+                      <Heart className="w-4 h-4" />
+                      <span>{art.likes}</span>
                     </div>
                   </div>
-                  <span className="text-sm text-base-content/70">{art.artistName}</span>
                 </div>
-                <div className="flex items-center justify-between mt-2">
-                  <div className="badge badge-outline badge-primary">{art.category}</div>
-                  <div className="flex items-center gap-1 text-sm text-base-content/60">
-                    <Heart className="w-4 h-4" />
-                    <span>{art.likes}</span>
-                  </div>
+                <div className="flex justify-between p-4 border-t border-base-200">
+                  <button className="btn btn-sm btn-warning" onClick={() => handleEdit(art)}>
+                    Update
+                  </button>
+                  <button className="btn btn-sm btn-error" onClick={() => handleDelete(art._id)}>
+                    Delete
+                  </button>
                 </div>
               </div>
-              <div className="flex justify-between p-4 border-t border-base-200">
-                <button className="btn btn-sm btn-warning" onClick={() => handleEdit(art)}>
-                  Update
-                </button>
-                <button className="btn btn-sm btn-error" onClick={() => handleDelete(art._id)}>
-                  Delete
-                </button>
-              </div>
-            </div>
+            </Fade>
           ))}
         </div>
       )}

@@ -23,19 +23,43 @@ const AddArtWork = () => {
       visibility: form.visibility.value,
       artistName: form.userName.value,
       userEmail: form.userEmail.value,
+      createdAt: new Date().toISOString(),
     };
-    axiosInstanse.post("/add-art", newArt).then((res) => {
-      toast.success("successfully added ", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: false,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
+    axiosInstanse
+      .post("/add-art", newArt)
+      .then((res) => {
+        if (res.data.insertedId) {
+          toast.success("successfully added ", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          toast.warning("Error while adding art ", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      })
+      .catch((error) => {
+        toast.error(`${error.message}`, {
+          position: "top-right",
+          autoClose: 5000,
+          theme: "light",
+        });
+        console.log(error);
       });
-    });
   };
 
   return (

@@ -11,6 +11,7 @@ import AddArtWork from "../components/AddArtWork/AddArtWork";
 import AllartWork from "../components/AllartWork/AllartWork";
 import LoadingPage from "../components/LoadingPage/LoadingPage";
 import GalleryPage from "../components/GalleryPage/GalleryPage";
+import Favorites from "../components/Favourite/Favorite";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <GalleryPage></GalleryPage>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/favorites",
+        element: (
+          <PrivateRoute>
+            <Favorites></Favorites>
           </PrivateRoute>
         ),
       },

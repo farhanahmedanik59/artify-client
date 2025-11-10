@@ -1,23 +1,87 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLoaderData } from "react-router";
+import useAxios from "../../hooks/useAxios";
+import { AuthContex } from "../../contexts/AuthContex";
+import { toast, ToastContainer } from "react-toastify";
 
 const ArtworkDetail = () => {
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(35);
   const artworkData = useLoaderData();
+  const axiosInstance = useAxios();
+  const { user } = useContext(AuthContex);
+  const [adding, setAdding] = useState(false); // to handle button disable state
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleLike = () => {
+  const handleLike = async () => {
     setLiked(!liked);
     setLikeCount((prev) => (liked ? prev - 1 : prev + 1));
+    try {
+      if (liked) {
+        toast.success("You liked this artwork ❤️");
+        return;
+      }
+
+      setLiked(true);
+      setLikeCount((prev) => prev + 1);
+
+      const res = await axiosInstance.patch(`/arts/like/${artworkData._id}`);
+      if (res.data.success) {
+        setLikeCount(res.data.likes);
+        toast.success("You liked this artwork ❤️");
+      } else {
+        toast.error("Failed to update like count.");
+      }
+    } catch (error) {
+      console.error("Error liking artwork:", error);
+      toast.error("Something went wrong while liking this artwork.");
+    }
   };
 
   const formatDate = (dateString) => {
     const options = { year: "numeric", month: "long", day: "numeric" };
     return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
+  const handleAddToFavorites = async () => {
+    setAdding(true);
+    console.log(artworkData._id, artworkData.userEmail);
+    const favoriteItem = {
+      favorite: `${user.email}`,
+      artwordId: artworkData._id,
+      artistImageURL: user.photoURL,
+      imageURL: artworkData.imageURL,
+      title: artworkData.title,
+      category: artworkData.category,
+      medium: artworkData.medium,
+      description: artworkData.description,
+      dimensions: artworkData.dimensions,
+      price: artworkData.price || 0,
+      likes: 0,
+      visibility: artworkData.visibility,
+      artistName: artworkData.userName,
+      userEmail: artworkData.userEmail,
+      createdAt: new Date().toISOString(),
+    };
+
+    try {
+      const res = await axiosInstance.post("/favorites", favoriteItem);
+      console.log(res);
+      console.log(res.data.insertedId);
+      if (res.data.insertedId) {
+        toast.success("Added to favorites!");
+      } else if (res.data.message === "Already added") {
+        toast.info("Already added");
+      }
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+      toast.error("Failed to add to favorites. Please try again.");
+    } finally {
+      setAdding(false);
+    }
   };
 
   return (
@@ -33,8 +97,8 @@ const ArtworkDetail = () => {
                 <h1 className="card-title text-3xl font-bold">{artworkData.title}</h1>
                 <p className="text-lg opacity-70">{artworkData.category}</p>
               </div>
-              <button onClick={handleLike} className={`btn btn-ghost btn-circle ${liked ? "text-error" : "text-base-content/50"} transition-transform duration-200 hover:scale-110`}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill={liked ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+              <button onClick={handleLike} className={`btn btn-ghost btn-circle ${liked ? "text-error" : "text-error"} transition-transform duration-200 hover:scale-110`}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill={liked ? "currentColor" : "currentColor"} viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -44,6 +108,7 @@ const ArtworkDetail = () => {
                 </svg>
               </button>
             </div>
+
             <div className="mt-4 flex items-center space-x-4">
               <div className="avatar">
                 <div className="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
@@ -55,7 +120,9 @@ const ArtworkDetail = () => {
                 <p className="text-sm opacity-70">{artworkData.userEmail}</p>
               </div>
             </div>
+
             <p className="mt-4 leading-relaxed">{artworkData.description}</p>
+
             <div className="grid grid-cols-2 gap-4 mt-4">
               <div>
                 <span className="font-medium opacity-70">Medium</span>
@@ -74,20 +141,25 @@ const ArtworkDetail = () => {
                 <p>{artworkData.category}</p>
               </div>
             </div>
+
             <div className="divider"></div>
+
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <div>
                 <p className="text-2xl font-bold">${artworkData.price}</p>
                 <p className="text-sm opacity-70">Price</p>
               </div>
+
               <div className="flex gap-2">
-                <button className="btn btn-outline">Contact Artist</button>
-                <button className="btn btn-primary">Purchase</button>
+                <button onClick={handleAddToFavorites} disabled={adding} className="btn btn-primary">
+                  {adding ? "Adding..." : "Add to Favorites"}
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick pauseOnHover draggable theme="light" />
     </div>
   );
 };
