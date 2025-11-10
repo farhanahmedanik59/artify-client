@@ -2,9 +2,10 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContex } from "../../contexts/AuthContex";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
-  const { signUp } = useContext(AuthContex);
+  const { signUp, setUser } = useContext(AuthContex);
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState("");
@@ -15,30 +16,43 @@ const Register = () => {
 
   const validatePassword = (pass) => /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/.test(pass);
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+
     if (!validatePassword(password)) {
       setError("Password must contain uppercase, lowercase, and at least 6 characters.");
       return;
     }
+
     setError("");
-    signUp(email, password)
-      .then(() => {
-        Swal.fire({
-          icon: "success",
-          title: "Account Created",
-          showConfirmButton: false,
-          timer: 1200,
-        });
-        navigate("/login");
-      })
-      .catch((err) => {
-        Swal.fire({
-          icon: "error",
-          title: "Registration Failed",
-          text: err.message || "Something went wrong",
-        });
+
+    try {
+      const result = await signUp(email, password);
+      const user = result.user;
+
+      await updateProfile(user, {
+        displayName: name,
+        photoURL: photo,
       });
+
+      // ✅ Force the updated user to re-sync in context immediately
+      setUser({ ...user, displayName: name, photoURL: photo });
+
+      Swal.fire({
+        icon: "success",
+        title: "Account Created",
+        showConfirmButton: false,
+        timer: 1200,
+      });
+
+      navigate("/");
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: err.message || "Something went wrong",
+      });
+    }
   };
 
   return (

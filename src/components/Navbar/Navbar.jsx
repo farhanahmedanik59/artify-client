@@ -5,6 +5,7 @@ import { AuthContex } from "../../contexts/AuthContex";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase.config";
 import { Fade } from "react-awesome-reveal";
+import userPng from "../../assets/user.png";
 
 export default function Navbar() {
   const { user } = useContext(AuthContex);
@@ -88,7 +89,7 @@ export default function Navbar() {
                 hideTimeout.current = setTimeout(() => setShowDropdown(false), 300);
               }}
             >
-              <img src={user.photoURL || "https://via.placeholder.com/40"} alt="User Avatar" className="w-10 h-10 rounded-full cursor-pointer" />
+              <img src={user.photoURL || userPng} alt="User Avatar" className={"w-10 h-10   rounded-full cursor-pointer"} />
               {showDropdown && (
                 <Fade cascade direction="down" triggerOnce>
                   <div className="absolute right-0 mt-2 w-48 bg-base-200 rounded-lg shadow-lg p-3 flex flex-col gap-2">
@@ -124,7 +125,7 @@ export default function Navbar() {
             {user ? (
               <li>
                 <div className="flex flex-col items-start gap-2 p-2">
-                  <img src={user.photoURL || "https://via.placeholder.com/40"} alt="User Avatar" className="w-10 h-10 rounded-full" />
+                  <img src={user.photoURL} alt="User Avatar" className="w-10 h-10 rounded-full" />
                   <span className="font-medium">{user.displayName || user.email}</span>
                   <button onClick={handleLogout} className="btn btn-outline btn-sm gap-2 justify-start w-full">
                     <LogOut size={16} /> Logout

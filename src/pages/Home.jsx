@@ -11,17 +11,19 @@ const Home = () => {
   const arts = useLoaderData();
   return (
     <div>
-      <section className="bg-base-100 text-base-content transition-colors duration-300 max-w-[90%] mx-auto">
+      <section className="bg-base-100 text-base-content transition-colors duration-300 max-w-[75%] mx-auto">
         <div className="container mx-auto py-16 flex flex-col md:flex-row items-center justify-between gap-40">
           <div className="md:w-1/2 space-y-6 text-center md:text-left">
-            <h1 className="text-5xl md:text-6xl font-bold leading-tight">
-              <Typewriter words={["Discover and Explore Creative Art"]} cursor cursorStyle="_" typeSpeed={70} deleteSpeed={50} delaySpeed={1000} />
-            </h1>
-            {/* <p className="text-base-content/70 max-w-md mx-auto md:mx-0">A platform for artists to showcase their work and connect with art enthusiasts.</p> */}
-            <p className="text-base-content/70 max-w-md mx-auto md:mx-0">
-              {" "}
-              <Typewriter words={["A platform for artists to showcase their work and connect with art enthusiasts."]} cursor cursorStyle="_" typeSpeed={20} deleteSpeed={50} delaySpeed={1000} />
-            </p>
+            <Fade>
+              <h1 className="text-5xl md:text-6xl font-bold leading-tight">
+                <Typewriter words={["Discover and Explore Creative Art"]} cursor cursorStyle="_" typeSpeed={70} deleteSpeed={50} delaySpeed={1000} />
+              </h1>
+
+              <p className="text-base-content/70 max-w-md mx-auto md:mx-0">
+                {" "}
+                <Typewriter words={["A platform for artists to showcase their work and connect with art enthusiasts."]} cursor cursorStyle="_" typeSpeed={20} deleteSpeed={50} delaySpeed={1000} />
+              </p>
+            </Fade>
             <Link to={"/explore"}>
               <button className="mt-4 bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-md font-medium transition-all shadow-md">Explore Artworks</button>
             </Link>
@@ -35,7 +37,7 @@ const Home = () => {
         <h1 className="text-4xl md:text-5xl font-bold leading-tight text-center underline">Recent ArtWork</h1>
       </Fade>
       <Fade>
-        <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-13 gap-6 max-w-[80%] mx-auto py-10">
+        <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-13 gap-6 max-w-[70%] mx-auto py-10">
           {arts.map((art) => (
             <ArtCard key={art.id} artwork={art} />
           ))}
