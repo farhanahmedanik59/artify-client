@@ -8,6 +8,7 @@ import { Link, Navigate } from "react-router";
 import { Fade } from "react-awesome-reveal";
 
 const GalleryPage = () => {
+  window.scrollTo(0, 0);
   const { user } = useContext(AuthContex);
   const axiosInstance = useAxios();
 

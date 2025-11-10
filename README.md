@@ -1,16 +1,49 @@
-# React + Vite
+🎨 Artify — Discover & Showcase Creative Artworks
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Live Site: https://artify-gallery.netlify.app
 
-Currently, two official plugins are available:
+Server Repository: https://github.com/yourusername/artify-server
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🌟 Overview
 
-## React Compiler
+Artify is an online art gallery platform where artists can showcase their work, and art lovers can explore, like, and save their favorite artworks. The site provides a smooth and visually appealing browsing experience for all types of art enthusiasts.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+✨ Key Features
 
-## Expanding the ESLint configuration
+🖼️ Public Art Gallery: Browse artworks from different categories such as Landscape, Abstract, Portrait, Seascape, and more.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🔍 Search & Filter: Instantly search artworks by title or artist, and filter by multiple categories.
+
+❤️ Like & Favorite System: Users can like artworks and save them to their favorites collection.
+
+🎨 Artist Dashboard: Artists can add, edit, or delete their own artworks, and manage their visibility (Public/Private).
+
+🚀 Dynamic & Fast: Built with React, Express, and MongoDB for a seamless full-stack experience.
+
+🛠️ Technologies Used
+
+Frontend: React, React Router, Tailwind CSS, DaisyUI, React Awesome Reveal
+Backend: Node.js, Express.js, MongoDB (with MongoDB Atlas)
+Hosting: Netlify (Client) & Render/Express (Server)
+
+📦 Installation (For Developers)
+
+# Clone both repos
+
+git clone https://github.com/yourusername/artify-client.git
+git clone https://github.com/yourusername/artify-server.git
+
+# Install dependencies
+
+cd artify-client && npm install
+cd ../artify-server && npm install
+
+# Run locally
+
+npm run dev # for client
+npm start # for server
+
+📸 Preview
+
+Would you like me to tailor this README to your actual deployed client URL and GitHub repo name?
+If you share them, I’ll insert the real links and image preview.

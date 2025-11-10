@@ -37,6 +37,7 @@ const cardVariants = {
 };
 
 const Favorites = () => {
+  window.scrollTo(0, 0);
   const { user } = useContext(AuthContex);
   const axiosInstance = useAxios();
   const [favorites, setFavorites] = useState([]);

@@ -1,10 +1,13 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContex } from "../../contexts/AuthContex";
 import { updateProfile } from "firebase/auth";
 
 const Register = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const { signUp, setUser } = useContext(AuthContex);
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");

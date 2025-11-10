@@ -1,45 +1,40 @@
 import { useLoaderData, useNavigate } from "react-router";
-import { useState, useMemo } from "react";
-
+import { useState, useMemo, useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
 
 const categories = ["Landscape", "Abstract", "Seascape", "Botanical", "Portrait", "Figurative", "Urban"];
 
 export default function ArtworksPage() {
-  window.scrollTo(0, 0);
   const artworks = useLoaderData();
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
   const navigate = useNavigate();
 
-  // Toggle category selection
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
   const toggleCategory = (category) => {
     setSelectedCategories((prev) => (prev.includes(category) ? prev.filter((cat) => cat !== category) : [...prev, category]));
   };
 
-  // Filter artworks based on search and selected categories
   const filteredArtworks = useMemo(() => {
     let result = artworks;
-
-    // Filter by title (search)
     if (search.trim() !== "") {
       const searchLower = search.toLowerCase();
       result = result.filter((art) => art.title.toLowerCase().includes(searchLower));
     }
-
-    // Filter by selected categories
     if (selectedCategories.length > 0) {
       const selectedLower = selectedCategories.map((cat) => cat.toLowerCase());
       result = result.filter((art) => selectedLower.includes(art.category.toLowerCase()));
     }
-
     return result;
   }, [artworks, search, selectedCategories]);
 
   return (
     <div>
       <div className="max-w-7xl mx-auto px-4 py-8 transition-colors duration-300">
-        <Fade>
+        <Fade direction="up" triggerOnce>
           <h1 className="text-3xl font-bold mb-6 text-center text-primary">Public Artworks</h1>
         </Fade>
 
@@ -60,34 +55,32 @@ export default function ArtworksPage() {
         </div>
 
         {filteredArtworks.length > 0 ? (
-          <div>
-            <Fade>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {filteredArtworks.map((art) => (
-                  <div key={art._id} className="card bg-base-200 shadow-xl hover:shadow-2xl transition">
-                    <figure>
-                      <img src={art.imageURL} alt={art.title} className="h-48 w-full object-cover" />
-                    </figure>
-                    <div className="card-body">
-                      <h2 className="card-title">{art.title}</h2>
-                      <p className="text-sm">
-                        <span className="font-medium">Artist:</span> {art.artistName}
-                      </p>
-                      <p className="text-sm">
-                        <span className="font-medium">Category:</span> {art.category}
-                      </p>
-                      <div className="card-actions justify-between items-center mt-2">
-                        <span className="text-error">❤️ {art.likes}</span>
-                        <button onClick={() => navigate(`/arts/${art._id}`)} className="btn btn-primary btn-sm">
-                          View Details
-                        </button>
-                      </div>
+          <Fade direction="up" triggerOnce>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {filteredArtworks.map((art) => (
+                <div key={art._id} className="card bg-base-200 shadow-xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                  <figure>
+                    <img src={art.imageURL} alt={art.title} className="h-48 w-full object-cover" />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title">{art.title}</h2>
+                    <p className="text-sm">
+                      <span className="font-medium">Artist:</span> {art.artistName}
+                    </p>
+                    <p className="text-sm">
+                      <span className="font-medium">Category:</span> {art.category}
+                    </p>
+                    <div className="card-actions justify-between items-center mt-2">
+                      <span className="text-error">❤️ {art.likes}</span>
+                      <button onClick={() => navigate(`/arts/${art._id}`)} className="btn btn-primary btn-sm">
+                        View Details
+                      </button>
                     </div>
                   </div>
-                ))}
-              </div>
-            </Fade>
-          </div>
+                </div>
+              ))}
+            </div>
+          </Fade>
         ) : (
           <p className="text-center text-base-content/70 mt-10">No artworks found matching your search or category.</p>
         )}

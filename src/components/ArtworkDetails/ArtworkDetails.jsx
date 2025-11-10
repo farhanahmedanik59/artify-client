@@ -10,8 +10,8 @@ const ArtworkDetail = () => {
   const artworkData = useLoaderData();
   const axiosInstance = useAxios();
   const { user } = useContext(AuthContex);
-  const [adding, setAdding] = useState(false); // to handle button disable state
-
+  const [adding, setAdding] = useState(false);
+  console.log(artworkData);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);

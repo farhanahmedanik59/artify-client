@@ -9,6 +9,7 @@ import { Fade } from "react-awesome-reveal";
 import CommunityHighlights from "../components/CommunityHighlights/CommunityHighlights";
 
 const Home = () => {
+  window.scrollTo(0, 0);
   const arts = useLoaderData();
   return (
     <div>
