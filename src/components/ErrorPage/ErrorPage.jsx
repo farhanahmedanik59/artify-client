@@ -10,7 +10,7 @@ const ErrorPage = () => {
         </div>
 
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-base-content mb-4 animate-fade-in">Artwork Not Found</h1>
+          <h1 className="text-3xl font-bold text-base-content mb-4 animate-fade-in">Page Not Found</h1>
           <p className="text-lg text-base-content/70 max-w-md mx-auto animate-fade-in">The page you're looking for seems to have been moved or doesn't exist.</p>
         </div>
 

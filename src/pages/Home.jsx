@@ -9,11 +9,11 @@ import { Fade } from "react-awesome-reveal";
 import CommunityHighlights from "../components/CommunityHighlights/CommunityHighlights";
 
 const Home = () => {
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: "smooth" });
   const arts = useLoaderData();
   return (
     <div>
-      <section className="bg-base-100 text-base-content transition-colors duration-300 max-w-[75%] mx-auto">
+      <section className="bg-base-100 text-base-content transition-colors duration-300 max-w-[90%] md:max-w-[75%] mx-auto">
         <div className="container mx-auto py-16 flex flex-col md:flex-row items-center justify-between gap-20 md:gap-40">
           <div className="md:w-1/2 space-y-6 text-center md:text-left">
             <Fade>
@@ -30,16 +30,18 @@ const Home = () => {
               <button className="mt-4 bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-md font-medium transition-all shadow-md">Explore Artworks</button>
             </Link>
           </div>
-          <div className=" flex h-[500px] justify-center object-cover w-full">
-            <img src={heroImage} alt="Artist painting illustration" className="w-full object-cover  rounded-lg shadow-lg" />
-          </div>
+          <Fade className=" flex h-[500px] justify-center object-cover w-full">
+            <div className=" flex h-[500px] justify-center object-cover w-full">
+              <img src={heroImage} alt="Artist painting illustration" className="w-full object-cover  rounded-lg shadow-lg" />
+            </div>
+          </Fade>
         </div>
       </section>
       <Fade>
         <h1 className="text-4xl md:text-5xl font-bold leading-tight text-center underline">Recent ArtWork</h1>
       </Fade>
       <Fade>
-        <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-6 md:p-13 gap-6  md:max-w-[70%] mx-auto py-10">
+        <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-6 md:p-13 gap-6  md:max-w-[70%]  mx-auto py-10">
           {arts.map((art) => (
             <ArtCard key={art.id} artwork={art} />
           ))}

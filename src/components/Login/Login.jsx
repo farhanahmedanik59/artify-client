@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContex } from "../../contexts/AuthContex";
 
@@ -10,14 +10,20 @@ const Login = () => {
   const { signIn, signInWithGoogle } = useContext(AuthContex);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
+  const location = useLocation();
   const handleLogin = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     signIn(email, password)
       .then((userCred) => {
-        if (userCred.user) navigate("/");
+        if (userCred.user) {
+          if (location.state) {
+            navigate(`${location.state.from.pathname}`);
+          } else {
+            navigate("/");
+          }
+        }
       })
       .catch((error) => {
         Swal.fire({
@@ -27,7 +33,6 @@ const Login = () => {
         });
       });
   };
-
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((userCred) => {
@@ -41,7 +46,6 @@ const Login = () => {
         });
       });
   };
-
   return (
     <div className="min-h-screen bg-base-100 text-base-content flex items-center justify-center p-4 transition-colors duration-300">
       <div className="card w-full max-w-md bg-base-200 shadow-2xl">
@@ -72,15 +76,6 @@ const Login = () => {
                   {showPassword ? "🙈" : "👁️"}
                 </button>
               </div>
-            </div>
-            <div className="flex items-center justify-between">
-              <label className="cursor-pointer label">
-                <input type="checkbox" className="checkbox checkbox-primary checkbox-sm" />
-                <span className="label-text text-base-content ml-2">Remember me</span>
-              </label>
-              <a href="#" className="label-text-alt text-primary hover:text-primary-focus">
-                Forgot password?
-              </a>
             </div>
             <button type="submit" className="btn btn-primary w-full">
               Sign In

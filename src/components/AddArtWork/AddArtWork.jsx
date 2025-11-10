@@ -4,7 +4,7 @@ import useAxios from "../../hooks/useAxios";
 import { toast, ToastContainer } from "react-toastify";
 
 const AddArtWork = () => {
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, behavior: "smooth" });
   const { user } = useContext(AuthContex);
   const axiosInstanse = useAxios();
   const [previewImage, setPreviewImage] = useState("");
@@ -221,6 +221,7 @@ const AddArtWork = () => {
                     <label className="block text-sm font-medium text-base-content mb-2">Visibility</label>
                     <select
                       name="visibility"
+                      required
                       className="w-full px-4 py-3 bg-base-100 border border-base-300 rounded-xl focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
                     >
                       <option value="Public">Public</option>

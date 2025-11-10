@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigate } from "react-router";
 import { useState, useMemo, useEffect } from "react";
-import { Fade } from "react-awesome-reveal";
+import { Fade, Slide } from "react-awesome-reveal";
 
 const categories = ["Landscape", "Abstract", "Seascape", "Botanical", "Portrait", "Figurative", "Urban"];
 
@@ -35,7 +35,7 @@ export default function ArtworksPage() {
     <div>
       <div className="max-w-7xl mx-auto px-4 py-8 transition-colors duration-300">
         <Fade direction="up" triggerOnce>
-          <h1 className="text-3xl font-bold mb-6 text-center text-primary">Public Artworks</h1>
+          <h1 className="text-4xl font-bold mb-6 text-center text-primary">Public Artworks</h1>
         </Fade>
 
         <div className="flex flex-col md:flex-row md:items-center justify-center gap-4 mb-6">
@@ -55,8 +55,8 @@ export default function ArtworksPage() {
         </div>
 
         {filteredArtworks.length > 0 ? (
-          <Fade direction="up" triggerOnce>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <Fade>
               {filteredArtworks.map((art) => (
                 <div key={art._id} className="card bg-base-200 shadow-xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
                   <figure>
@@ -79,8 +79,8 @@ export default function ArtworksPage() {
                   </div>
                 </div>
               ))}
-            </div>
-          </Fade>
+            </Fade>
+          </div>
         ) : (
           <p className="text-center text-base-content/70 mt-10">No artworks found matching your search or category.</p>
         )}

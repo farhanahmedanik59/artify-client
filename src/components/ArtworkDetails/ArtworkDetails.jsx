@@ -5,29 +5,20 @@ import { AuthContex } from "../../contexts/AuthContex";
 import { toast, ToastContainer } from "react-toastify";
 
 const ArtworkDetail = () => {
-  const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(35);
   const artworkData = useLoaderData();
   const axiosInstance = useAxios();
   const { user } = useContext(AuthContex);
   const [adding, setAdding] = useState(false);
-  console.log(artworkData);
+
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const handleLike = async () => {
-    setLiked(!liked);
-    setLikeCount((prev) => (liked ? prev - 1 : prev + 1));
+    setLikeCount((prev) => prev + 1);
+
     try {
-      if (liked) {
-        toast.success("You liked this artwork ❤️");
-        return;
-      }
-
-      setLiked(true);
-      setLikeCount((prev) => prev + 1);
-
       const res = await axiosInstance.patch(`/arts/like/${artworkData._id}`);
       if (res.data.success) {
         setLikeCount(res.data.likes);
@@ -48,7 +39,6 @@ const ArtworkDetail = () => {
 
   const handleAddToFavorites = async () => {
     setAdding(true);
-    console.log(artworkData._id, artworkData.userEmail);
     const favoriteItem = {
       favorite: `${user.email}`,
       artwordId: artworkData._id,
@@ -69,8 +59,6 @@ const ArtworkDetail = () => {
 
     try {
       const res = await axiosInstance.post("/favorites", favoriteItem);
-      console.log(res);
-      console.log(res.data.insertedId);
       if (res.data.insertedId) {
         toast.success("Added to favorites!");
       } else if (res.data.message === "Already added") {
@@ -97,8 +85,8 @@ const ArtworkDetail = () => {
                 <h1 className="card-title text-3xl font-bold">{artworkData.title}</h1>
                 <p className="text-lg opacity-70">{artworkData.category}</p>
               </div>
-              <button onClick={handleLike} className={`btn btn-ghost btn-circle ${liked ? "text-error" : "text-error"} transition-transform duration-200 hover:scale-110`}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill={liked ? "currentColor" : "currentColor"} viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
+              <button onClick={handleLike} className={`btn btn-ghost btn-circle text-error transition-transform duration-200 hover:scale-110`}>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

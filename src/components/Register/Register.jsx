@@ -6,9 +6,9 @@ import { updateProfile } from "firebase/auth";
 
 const Register = () => {
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
-  const { signUp, setUser } = useContext(AuthContex);
+  const { signUp, setUser, signInWithGoogle } = useContext(AuthContex);
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [photo, setPhoto] = useState("");
@@ -38,7 +38,6 @@ const Register = () => {
         photoURL: photo,
       });
 
-      // ✅ Force the updated user to re-sync in context immediately
       setUser({ ...user, displayName: name, photoURL: photo });
 
       Swal.fire({
@@ -56,6 +55,21 @@ const Register = () => {
         text: err.message || "Something went wrong",
       });
     }
+  };
+
+  const handlegamillogin = async (e) => {
+    e.preventDefault();
+    signInWithGoogle()
+      .then((userCred) => {
+        if (userCred.user) navigate("/");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: `${error.message}`,
+        });
+      });
   };
 
   return (
@@ -121,7 +135,7 @@ const Register = () => {
           </form>
 
           <div className="divider text-base-content/50 my-6">OR</div>
-          <button className="btn w-full bg-white text-black border-[#e5e5e5]">
+          <button onClick={handlegamillogin} className="btn w-full bg-white text-black border-[#e5e5e5]">
             <svg aria-label="Google logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
               <g>
                 <path d="m0 0H512V512H0" fill="#fff"></path>

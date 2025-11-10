@@ -30,7 +30,7 @@ export default function Navbar() {
       </li>
       <li>
         <NavLink to="/explore" className="hover:text-primary">
-          Explore
+          Explore Artwork
         </NavLink>
       </li>
       {user && (
@@ -47,7 +47,7 @@ export default function Navbar() {
           </li>
           <li>
             <NavLink to="/favorites" className="hover:text-primary">
-              Favorites
+              My Favorites
             </NavLink>
           </li>
         </>

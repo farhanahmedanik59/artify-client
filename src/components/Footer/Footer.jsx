@@ -59,9 +59,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/artists" className="link link-hover text-base-content/70 hover:text-base-content">
-                    Featured Artists
-                  </a>
+                  <a className="link link-hover text-base-content/70 hover:text-base-content">Featured Artists</a>
                 </li>
               </ul>
             </div>
