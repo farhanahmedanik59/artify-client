@@ -44,6 +44,3 @@ npm run dev # for client
 npm start # for server
 
 📸 Preview
-
-Would you like me to tailor this README to your actual deployed client URL and GitHub repo name?
-If you share them, I’ll insert the real links and image preview.
