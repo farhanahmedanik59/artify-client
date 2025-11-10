@@ -6,6 +6,7 @@ import TopArtists from "../components/TopArtists/TopArtists";
 import { ToastContainer } from "react-toastify";
 import { Typewriter } from "react-simple-typewriter";
 import { Fade } from "react-awesome-reveal";
+import CommunityHighlights from "../components/CommunityHighlights/CommunityHighlights";
 
 const Home = () => {
   const arts = useLoaderData();
@@ -44,6 +45,7 @@ const Home = () => {
         </div>
       </Fade>
       <TopArtists></TopArtists>
+      <CommunityHighlights></CommunityHighlights>
     </div>
   );
 };

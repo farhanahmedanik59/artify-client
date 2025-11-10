@@ -4,6 +4,7 @@ import useAxios from "../../hooks/useAxios";
 import { toast, ToastContainer } from "react-toastify";
 
 const AddArtWork = () => {
+  window.scrollTo(0, 0);
   const { user } = useContext(AuthContex);
   const axiosInstanse = useAxios();
   const [previewImage, setPreviewImage] = useState("");

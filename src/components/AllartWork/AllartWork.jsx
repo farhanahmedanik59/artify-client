@@ -6,6 +6,7 @@ import { Fade } from "react-awesome-reveal";
 const categories = ["Landscape", "Abstract", "Seascape", "Botanical", "Portrait", "Figurative", "Urban"];
 
 export default function ArtworksPage() {
+  window.scrollTo(0, 0);
   const artworks = useLoaderData();
   const [search, setSearch] = useState("");
   const [selectedCategories, setSelectedCategories] = useState([]);
