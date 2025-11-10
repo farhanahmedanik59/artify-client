@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div>
       <section className="bg-base-100 text-base-content transition-colors duration-300 max-w-[75%] mx-auto">
-        <div className="container mx-auto py-16 flex flex-col md:flex-row items-center justify-between gap-40">
+        <div className="container mx-auto py-16 flex flex-col md:flex-row items-center justify-between gap-20 md:gap-40">
           <div className="md:w-1/2 space-y-6 text-center md:text-left">
             <Fade>
               <h1 className="text-5xl md:text-6xl font-bold leading-tight">
@@ -39,7 +39,7 @@ const Home = () => {
         <h1 className="text-4xl md:text-5xl font-bold leading-tight text-center underline">Recent ArtWork</h1>
       </Fade>
       <Fade>
-        <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-13 gap-6 max-w-[70%] mx-auto py-10">
+        <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-6 md:p-13 gap-6  md:max-w-[70%] mx-auto py-10">
           {arts.map((art) => (
             <ArtCard key={art.id} artwork={art} />
           ))}

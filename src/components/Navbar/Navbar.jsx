@@ -139,7 +139,7 @@ export default function Navbar() {
                     Login
                   </Link>
                 </li>
-                <li>
+                <li className="mt-3">
                   <Link className="btn btn-primary btn-sm rounded-lg text-white w-full" to="/register">
                     Register
                   </Link>
