@@ -52,8 +52,6 @@ export const router = createBrowserRouter([
       {
         path: "/explore",
         Component: AllartWork,
-        loader: () => fetch(`${import.meta.env.VITE_Base_Url}/allarts`),
-        hydrateFallbackElement: <LoadingPage></LoadingPage>,
       },
       {
         path: "/gallery",

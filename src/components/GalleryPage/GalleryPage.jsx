@@ -21,7 +21,7 @@ const GalleryPage = () => {
     try {
       setLoading(true);
       const res = await axiosInstance.get(`/my-arts?email=${user.email}`);
-      console.log(res);
+
       setArtworks(Array.isArray(res.data) ? res.data : []);
       setLoading(false);
     } catch (err) {
@@ -45,7 +45,7 @@ const GalleryPage = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axiosInstance.delete(`/delete-art/${artId}`).then((res) => console.log(res));
+          await axiosInstance.delete(`/delete-art/${artId}`);
           Swal.fire("Deleted!", "Artwork has been deleted.", "success");
           fetchArtworks();
         } catch (err) {
@@ -108,7 +108,13 @@ const GalleryPage = () => {
       </div>
 
       {loading ? (
-        <Loading />
+        <div className=" min-h-[500px] min-w-[500px] mx-auto flex items-center justify-center bg-base-100 ">
+          <div className="flex flex-col items-center space-y-4">
+            <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+            <h2 className="text-xl font-semibold text-primary">Loading Data...</h2>
+            <p className="text-center text-base-content/70 max-w-sm">Please wait while we fetch the latest artworks for you.</p>
+          </div>
+        </div>
       ) : artworks.length === 0 ? (
         <p className="text-center text-gray-500">No artworks found.</p>
       ) : (
@@ -219,5 +225,3 @@ const GalleryPage = () => {
 };
 
 export default GalleryPage;
-
-// have to do favourite

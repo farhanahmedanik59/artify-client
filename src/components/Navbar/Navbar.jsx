@@ -57,26 +57,21 @@ export default function Navbar() {
 
   return (
     <div className="navbar bg-base-100 shadow-md sticky top-0 z-50 px-6 transition-colors duration-300">
-      {/* Logo */}
       <div className="navbar-start">
         <Link to="/" className="flex items-center gap-2 text-2xl font-bold transition-colors duration-300">
           🎨 Artify
         </Link>
       </div>
 
-      {/* Desktop Menu */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 font-medium transition-colors duration-300">{navLinks}</ul>
       </div>
 
-      {/* Right side buttons */}
       <div className="navbar-end flex items-center gap-2">
-        {/* Theme Toggle */}
         <button onClick={toggleTheme} className="btn btn-ghost btn-circle hover:bg-base-200 transition-colors duration-300">
           {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
         </button>
 
-        {/* Desktop User / Auth Buttons */}
         <div className="hidden lg:flex items-center gap-2">
           {user ? (
             <div
@@ -113,7 +108,6 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Dropdown */}
         <div className="dropdown dropdown-end lg:hidden">
           <label tabIndex={0} className="btn btn-ghost btn-circle">
             ☰

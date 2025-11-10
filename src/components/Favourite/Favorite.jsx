@@ -59,7 +59,6 @@ const Favorites = () => {
   }, [user, axiosInstance]);
 
   const handleRemove = async (id) => {
-    console.log(id);
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "Do you want to remove this artwork from favorites?",
@@ -84,7 +83,6 @@ const Favorites = () => {
   };
 
   if (loading) return <Loader />;
-  console.log(favorites);
   return (
     <div className="min-h-[600px] mt-6 py-8 px-6 lg:px-10 bg-base-100 text-base-content transition-colors max-w-[90%] mx-auto duration-300">
       <ToastContainer position="top-right" autoClose={3000} />

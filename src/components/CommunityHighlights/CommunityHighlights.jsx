@@ -47,7 +47,6 @@ const CommunityHighlights = () => {
     },
   ];
 
-  // Intersection Observer for reveal animation
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -65,7 +64,6 @@ const CommunityHighlights = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Auto-rotate highlights
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % highlights.length);
@@ -153,7 +151,6 @@ const CommunityHighlights = () => {
   return (
     <section ref={sectionRef} className="py-20 px-4 bg-gradient-to-br from-base-100 to-base-200">
       <div className="max-w-7xl mx-auto">
-        {/* Header with Typewriter */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }} transition={{ duration: 0.8, ease: "easeOut" }} className="text-center mb-16">
           <h2 className="text-5xl md:text-6xl font-bold text-base-content mb-6">
             <TypewriterText text="Community Highlights" />
@@ -164,7 +161,6 @@ const CommunityHighlights = () => {
           </p>
         </motion.div>
 
-        {/* Main Highlight Card */}
         <div className="relative h-96 md:h-[500px] mb-12 rounded-3xl overflow-hidden">
           <AnimatePresence mode="wait" custom={activeIndex}>
             <motion.div key={activeIndex} custom={activeIndex} variants={cardVariants} initial="enter" animate="center" exit="exit" className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
@@ -172,7 +168,6 @@ const CommunityHighlights = () => {
                 <img src={highlights[activeIndex].image} alt={highlights[activeIndex].name} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
 
-                {/* Content Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
                   <motion.span
                     initial={{ opacity: 0, scale: 0 }}
@@ -194,7 +189,6 @@ const CommunityHighlights = () => {
                     {highlights[activeIndex].description}
                   </motion.p>
 
-                  {/* Stats */}
                   <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="flex gap-6">
                     {Object.entries(highlights[activeIndex].stats).map(([key, value]) => (
                       <div key={key} className="text-center">
@@ -208,7 +202,6 @@ const CommunityHighlights = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Dots */}
           <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex gap-3 z-10">
             {highlights.map((_, index) => (
               <button
@@ -220,7 +213,6 @@ const CommunityHighlights = () => {
           </div>
         </div>
 
-        {/* Grid of Smaller Highlights */}
         <Fade>
           <motion.div variants={containerVariants} initial="hidden" animate={isVisible ? "visible" : "hidden"} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {highlights.map((highlight, index) => (
@@ -263,7 +255,6 @@ const CommunityHighlights = () => {
           </motion.div>
         </Fade>
 
-        {/* CTA Section */}
         <motion.div initial={{ opacity: 0, y: 30 }} animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }} transition={{ delay: 1, duration: 0.6 }} className="text-center mt-16">
           <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-8 border border-primary/20">
             <h3 className="text-2xl font-bold text-base-content mb-4">Join Our Creative Community</h3>
