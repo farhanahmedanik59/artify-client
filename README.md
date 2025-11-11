@@ -45,4 +45,4 @@ npm start # for server
 
 📸 Preview
 
-![Preview](src/assets/preview.png)
+![Preview](https://raw.githubusercontent.com/farhanahmedanik59/artify-client/refs/heads/main/src/assets/preview.png)
