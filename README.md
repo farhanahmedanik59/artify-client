@@ -1,8 +1,8 @@
 🎨 Artify — Discover & Showcase Creative Artworks
 
-Live Site: https://artify-gallery.netlify.app
+Live Site: https://assignment10-297ce.web.app/
 
-Server Repository: https://github.com/yourusername/artify-server
+Server Repository: https://github.com/farhanahmedanik59/artify-server
 
 🌟 Overview
 
@@ -30,8 +30,8 @@ Hosting: Netlify (Client) & Render/Express (Server)
 
 # Clone both repos
 
-git clone https://github.com/yourusername/artify-client.git
-git clone https://github.com/yourusername/artify-server.git
+git clone https://github.com/farhanahmedanik59/artify-client
+git clone https://github.com/farhanahmedanik59/artify-server
 
 # Install dependencies
 
@@ -44,3 +44,5 @@ npm run dev # for client
 npm start # for server
 
 📸 Preview
+
+![Preview](src/assets/preview.png)
