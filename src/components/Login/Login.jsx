@@ -15,6 +15,7 @@ const Login = () => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+
     signIn(email, password)
       .then((userCred) => {
         if (userCred.user) {
@@ -36,7 +37,10 @@ const Login = () => {
   const handleGoogleLogin = () => {
     signInWithGoogle()
       .then((userCred) => {
-        if (userCred.user) navigate("/");
+        if (userCred.user) {
+          const from = location.state?.from?.pathname || "/";
+          navigate(from);
+        }
       })
       .catch((error) => {
         Swal.fire({

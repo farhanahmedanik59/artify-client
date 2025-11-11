@@ -83,7 +83,7 @@ export default function ArtworksPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           <Fade>
             {filteredArtworks.map((art) => (
-              <div key={art._id} className="card bg-base-200 shadow-xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
+              <div key={art._id} className="card bg-base-200 shadow-xl transition-transform duration-200 hover:-translate-y-2 hover:shadow-2xl">
                 <figure>
                   <img src={art.imageURL} alt={art.title} className="h-48 w-full object-cover" />
                 </figure>

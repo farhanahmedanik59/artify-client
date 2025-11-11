@@ -84,7 +84,7 @@ const Favorites = () => {
 
   if (loading) return <Loader />;
   return (
-    <div className="min-h-[600px] mt-6 py-8 px-6 lg:px-10 bg-base-100 text-base-content transition-colors max-w-[90%] mx-auto duration-300">
+    <div className="min-h-[600px] mt-6 py-8 px-6 lg:px-10 bg-base-100 text-base-content transition-colors max-w-[90%] mx-auto duration-100">
       <ToastContainer position="top-right" autoClose={3000} />
       <h1 className="text-4xl font-bold mb-8 text-center">❤️ My Favorites</h1>
 
