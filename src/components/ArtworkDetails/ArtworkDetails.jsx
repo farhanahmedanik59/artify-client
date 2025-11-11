@@ -16,8 +16,6 @@ const ArtworkDetail = () => {
   }, []);
 
   const handleLike = async () => {
-    setLikeCount((prev) => prev + 1);
-
     try {
       const res = await axiosInstance.patch(`/arts/like/${artworkData._id}`);
       if (res.data.success) {
