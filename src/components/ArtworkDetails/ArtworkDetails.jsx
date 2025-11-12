@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 
 const ArtworkDetail = () => {
   const [likeCount, setLikeCount] = useState(35);
+  const [artistArtCount, setArtistArtCount] = useState(0);
   const artworkData = useLoaderData();
   const axiosInstance = useAxios();
   const { user } = useContext(AuthContex);
@@ -13,7 +14,21 @@ const ArtworkDetail = () => {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+    const fetchArtistArtCount = async () => {
+      try {
+        const res = await axiosInstance.get(`/arts/count/${artworkData.userEmail}`);
+        if (res.data.count !== undefined) {
+          setArtistArtCount(res.data.count);
+        }
+      } catch (error) {
+        console.error("Failed to fetch artist artwork count:", error);
+      }
+    };
+
+    if (artworkData?.userEmail) {
+      fetchArtistArtCount();
+    }
+  }, [artworkData, axiosInstance]);
 
   const handleLike = async () => {
     try {
@@ -104,6 +119,9 @@ const ArtworkDetail = () => {
               <div>
                 <p className="font-medium text-lg">{artworkData.artistName}</p>
                 <p className="text-sm opacity-70">{artworkData.userEmail}</p>
+                <p className="text-sm mt-1 opacity-70">
+                  Total Artworks: <span className="font-semibold">{artistArtCount}</span>
+                </p>
               </div>
             </div>
 
