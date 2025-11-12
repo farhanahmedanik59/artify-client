@@ -35,20 +35,18 @@ const Login = () => {
       });
   };
   const handleGoogleLogin = () => {
-    signInWithGoogle()
-      .then((userCred) => {
-        if (userCred.user) {
-          const from = location.state?.from?.pathname || "/";
-          navigate(from);
-        }
-      })
-      .catch((error) => {
+    signInWithGoogle().then((userCred) => {
+      if (userCred.user) {
+        const from = location.state?.from?.pathname || "/";
+        navigate(from);
+      } else {
         Swal.fire({
           icon: "error",
           title: "Login Failed",
-          text: `${error.message}`,
+          text: `Login Failed`,
         });
-      });
+      }
+    });
   };
   return (
     <div className="min-h-screen bg-base-100 text-base-content flex items-center justify-center p-4 transition-colors duration-300">
