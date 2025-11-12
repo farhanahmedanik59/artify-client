@@ -59,17 +59,17 @@ const Register = () => {
 
   const handlegamillogin = async (e) => {
     e.preventDefault();
-    signInWithGoogle()
-      .then((userCred) => {
-        if (userCred.user) navigate("/");
-      })
-      .catch((error) => {
+    signInWithGoogle().then((userCred) => {
+      if (userCred.user) {
+        navigate("/");
+      } else {
         Swal.fire({
           icon: "error",
-          title: "Login Failed",
+          title: "Register Failed",
           text: `${error.message}`,
         });
-      });
+      }
+    });
   };
 
   return (
