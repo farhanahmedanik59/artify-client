@@ -60,6 +60,11 @@ const Register = () => {
   const handlegamillogin = async (e) => {
     e.preventDefault();
     signInWithGoogle().then((userCred) => {
+      Swal.fire({
+        icon: "success",
+        title: "Register Success ",
+        text: `Success`,
+      });
       if (userCred.user) {
         navigate("/");
       } else {
