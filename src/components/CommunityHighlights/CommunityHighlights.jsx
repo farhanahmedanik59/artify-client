@@ -161,7 +161,7 @@ const CommunityHighlights = () => {
           </p>
         </motion.div>
 
-        <div className="relative h-96 md:h-[500px] mb-12 rounded-3xl overflow-hidden">
+        <div className="relative min-h-[400px] sm:min-h-[450px] md:h-[500px] mb-12 rounded-3xl ">
           <AnimatePresence mode="wait" custom={activeIndex}>
             <motion.div key={activeIndex} custom={activeIndex} variants={cardVariants} initial="enter" animate="center" exit="exit" className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl">
               <div className="relative h-full">
