@@ -9,12 +9,12 @@ const ArtworkCard = ({ artwork }) => {
   return (
     <Fade>
       <div
-        className={`card bg-base-300  h-[550px] shadow-xl rounded-lg p-5 overflow-hidden transition-all duration-300 ${isHovered ? "transform -translate-y-2 shadow-2xl" : ""}`}
+        className={`card bg-base-300  h-[550px] shadow-xl rounded-lg p-3 overflow-hidden transition-all duration-300 ${isHovered ? "transform -translate-y-2 shadow-2xl" : ""}`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <figure className="relative h-90 overflow-hidden">
-          <img src={artwork.imageURL} alt={artwork.title} className={`w-full h-full object-cover transition-transform duration-500 ${isHovered ? "scale-105" : "scale-100"}`} />
+          <img src={artwork.imageURL} alt={artwork.title} className={`w-full h-full rounded-md object-cover transition-transform duration-500 ${isHovered ? "scale-105" : "scale-100"}`} />
           <div className="absolute top-3 right-3">
             <button className="btn btn-circle btn-sm bg-base-100/80 backdrop-blur-sm border-0 hover:scale-110 transition-transform duration-200">
               <Heart className="w-4 h-4 text-red-500" />
