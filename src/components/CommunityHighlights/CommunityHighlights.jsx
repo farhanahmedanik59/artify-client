@@ -14,7 +14,8 @@ const CommunityHighlights = () => {
       title: "Trending Artist",
       name: "David",
       description: "Digital portrait specialist breaking records with her latest collection 'Urban Dreams'",
-      image: "https://images.unsplash.com/photo-1628359355624-855775b5c9c4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1470",
+      image:
+        "https://artinflanders.be/sites/default/files/styles/artwork_cover_image_detail/public/artwork/fbfb7b128bf24b4f906b420660cb027b202f1b93c4b54ad2b6984c7fb9d31456b53a83fa823549289433c720b758cd00.jpg?itok=Kmtz0ooF",
       stats: { followers: "12.4K", sales: 89, rating: 4.9 },
       badge: "🔥 Trending",
     },

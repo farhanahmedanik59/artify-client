@@ -7,6 +7,13 @@ import { ToastContainer } from "react-toastify";
 import { Typewriter } from "react-simple-typewriter";
 import { Fade } from "react-awesome-reveal";
 import CommunityHighlights from "../components/CommunityHighlights/CommunityHighlights";
+import StatisticsSection from "../components/statistics/Statistics";
+import TestimonialsSection from "../components/Testimonial/Testimonial";
+import BlogsSection from "../components/Blogs/Blogs";
+import FAQSection from "../components/Faq/Faq";
+import CTASection from "../components/Cta/Cta";
+import FeaturesSection from "../components/Features/Features";
+import ServicesSection from "../components/ServicesCompnent/Services";
 
 const Home = () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -41,7 +48,7 @@ const Home = () => {
         <h1 className="text-4xl md:text-5xl font-bold leading-tight text-center underline">Recent ArtWork</h1>
       </Fade>
       <Fade>
-        <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-6 md:p-13 gap-6  md:max-w-[70%]  mx-auto py-10">
+        <div className="mt-3.5 shadow-lg rounded-xl mb-3.5  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 p-6 md:p-10 gap-6  md:max-w-[80%]  mx-auto py-10 bg-base-200">
           {arts.map((art) => (
             <ArtCard key={art.id} artwork={art} />
           ))}
@@ -49,6 +56,13 @@ const Home = () => {
       </Fade>
       <TopArtists></TopArtists>
       <CommunityHighlights></CommunityHighlights>
+      <StatisticsSection></StatisticsSection>
+      <TestimonialsSection></TestimonialsSection>
+      <BlogsSection></BlogsSection>
+      <FAQSection></FAQSection>
+      <CTASection></CTASection>
+      <FeaturesSection></FeaturesSection>
+      <ServicesSection></ServicesSection>
     </div>
   );
 };

@@ -33,13 +33,13 @@ export default function Navbar() {
           Explore Artwork
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/add-artwork" className="hover:text-primary">
+          Add Artwork
+        </NavLink>
+      </li>
       {user && (
         <>
-          <li>
-            <NavLink to="/add-artwork" className="hover:text-primary">
-              Add Artwork
-            </NavLink>
-          </li>
           <li>
             <NavLink to="/gallery" className="hover:text-primary">
               My Gallery

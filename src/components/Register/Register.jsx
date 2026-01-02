@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import { AuthContex } from "../../contexts/AuthContex";
 import { updateProfile } from "firebase/auth";
+import { Eye, EyeClosed } from "lucide-react";
 
 const Register = () => {
   useEffect(() => {
@@ -96,21 +97,21 @@ const Register = () => {
               <label className="label">
                 <span className="label-text text-base-content">Full Name</span>
               </label>
-              <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="🧑 Enter your full name" className="input input-bordered w-full pl-4" required />
+              <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your full name" className="input input-bordered w-full pl-4" required />
             </div>
 
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-base-content">Photo URL</span>
               </label>
-              <input type="text" name="photo" value={photo} onChange={(e) => setPhoto(e.target.value)} placeholder="🖼️ Enter photo URL" className="input input-bordered w-full pl-4" />
+              <input type="text" name="photo" value={photo} onChange={(e) => setPhoto(e.target.value)} placeholder=" Enter photo URL" className="input input-bordered w-full pl-4" />
             </div>
 
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-base-content">Email Address</span>
               </label>
-              <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="📧 Enter your email" className="input input-bordered w-full pl-4" required />
+              <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="  Enter your email" className="input input-bordered w-full pl-4" required />
             </div>
 
             <div className="form-control">
@@ -123,12 +124,12 @@ const Register = () => {
                   name="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="🔒 Create a password"
+                  placeholder="Create a password"
                   className="input input-bordered w-full pr-12 pl-4"
                   required
                 />
                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-base-content/50 hover:text-base-content">
-                  {showPassword ? "🙈" : "👁️"}
+                  {showPassword ? <EyeClosed></EyeClosed> : <Eye></Eye>}
                 </button>
               </div>
               {error && <p className="text-error text-sm mt-2">{error}</p>}

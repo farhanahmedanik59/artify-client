@@ -33,11 +33,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/arts/:id",
-        element: (
-          <PrivateRoute>
-            <ArtworkDetail></ArtworkDetail>
-          </PrivateRoute>
-        ),
+        element: <ArtworkDetail></ArtworkDetail>,
         loader: ({ params }) => fetch(`${import.meta.env.VITE_Base_Url}/arts/${params.id}`),
         hydrateFallbackElement: <LoadingPage></LoadingPage>,
       },
