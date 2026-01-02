@@ -12,6 +12,9 @@ import AllartWork from "../components/AllartWork/AllartWork";
 import LoadingPage from "../components/LoadingPage/LoadingPage";
 import GalleryPage from "../components/GalleryPage/GalleryPage";
 import Favorites from "../components/Favourite/Favorite";
+import DashboardLayout from "../layouts/DashboardLayout";
+import StatisticsSection from "../components/statistics/Statistics";
+import DashboardHome from "../components/DbHome/Dbhome";
 
 export const router = createBrowserRouter([
   {
@@ -64,6 +67,20 @@ export const router = createBrowserRouter([
             <Favorites></Favorites>
           </PrivateRoute>
         ),
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        index: true,
+        Component: DashboardHome,
       },
     ],
   },
