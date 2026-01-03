@@ -171,7 +171,7 @@ const ServicesSection = () => {
                 scale: 1.02,
                 transition: { type: "spring", stiffness: 400, damping: 17 },
               }}
-              onMouseEnter={() => setHoveredService(index)}
+              // onMouseEnter={() => setHoveredService(index)}
               onMouseLeave={() => setHoveredService(null)}
               className={`card shadow-xl hover:shadow-2xl transition-all duration-300 cursor-pointer overflow-hidden border-0 ${hoveredService === index ? "ring-2 ring-primary/30" : ""} ${
                 service.bgColor

@@ -15,6 +15,8 @@ import Favorites from "../components/Favourite/Favorite";
 import DashboardLayout from "../layouts/DashboardLayout";
 import StatisticsSection from "../components/statistics/Statistics";
 import DashboardHome from "../components/DbHome/Dbhome";
+import ProfilePage from "../components/Profile/Profile";
+import StatisticsPage from "../components/Statistics/Statistics";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +83,14 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: DashboardHome,
+      },
+      {
+        path: "/dashboard/user-info",
+        Component: ProfilePage,
+      },
+      {
+        path: "/dashboard/statistics",
+        Component: StatisticsPage,
       },
     ],
   },

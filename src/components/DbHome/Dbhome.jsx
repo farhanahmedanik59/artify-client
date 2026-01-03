@@ -1,9 +1,11 @@
 // DashboardHome.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import { AuthContex } from "../../contexts/AuthContex";
 
 const DashboardHome = () => {
+  const { user } = useContext(AuthContex);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [userStats, setUserStats] = useState({
@@ -28,16 +30,10 @@ const DashboardHome = () => {
       try {
         setLoading(true);
 
-        // In a real app, fetch from your APIs:
-        // const userEmail = localStorage.getItem("userEmail");
-        // const statsRes = await fetch(`/api/user-stats/${userEmail}`);
-        // const artsRes = await fetch(`/api/my-arts?email=${userEmail}`);
-
-        // Mock data for demonstration
         setTimeout(() => {
           setUserStats({
-            name: "Alex Chen",
-            email: "alex@example.com",
+            name: user.displayName,
+            email: user.email,
             joinedDate: "2024-01-15",
             artworksCount: 24,
             favoritesCount: 12,
@@ -98,7 +94,7 @@ const DashboardHome = () => {
       icon: "📤",
       color: "from-blue-500 to-cyan-500",
       path: "/dashboard/artworks/add",
-      action: () => navigate("/dashboard/artworks/add"),
+      action: () => navigate("/add-artwork"),
     },
     {
       title: "View Analytics",
@@ -106,7 +102,7 @@ const DashboardHome = () => {
       icon: "📊",
       color: "from-purple-500 to-pink-500",
       path: "/dashboard/analytics",
-      action: () => navigate("/dashboard/analytics"),
+      action: () => navigate("/dashboard/statistics"),
     },
     {
       title: "Edit Profile",
@@ -122,7 +118,7 @@ const DashboardHome = () => {
       icon: "👥",
       color: "from-emerald-500 to-teal-500",
       path: "/dashboard/community",
-      action: () => navigate("/dashboard/community"),
+      action: () => navigate("#"),
     },
   ];
 
@@ -138,7 +134,7 @@ const DashboardHome = () => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 p-4">
       {/* Hero Welcome Section */}
       <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-6 md:p-8 border border-primary/20">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -157,7 +153,7 @@ const DashboardHome = () => {
           </div>
           <div className="avatar">
             <div className="w-20 h-20 rounded-full ring-4 ring-primary/20 ring-offset-2 ring-offset-base-100">
-              <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${userStats.name}`} alt={userStats.name} className="rounded-full" />
+              <img src={user.photoURL} alt={userStats.name} className="rounded-full" />
             </div>
           </div>
         </div>
@@ -175,7 +171,7 @@ const DashboardHome = () => {
               <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 flex items-center justify-center text-2xl">🎨</div>
             </div>
             <div className="text-sm text-base-content/60 mt-2">Total uploaded artworks</div>
-            <Link to="/dashboard/artworks" className="btn btn-sm btn-outline mt-4">
+            <Link to="/explore" className="btn btn-sm btn-outline mt-4">
               View All
             </Link>
           </div>
@@ -191,7 +187,7 @@ const DashboardHome = () => {
               <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-pink-500/20 to-rose-500/20 flex items-center justify-center text-2xl">❤️</div>
             </div>
             <div className="text-sm text-base-content/60 mt-2">Artworks you've favorited</div>
-            <Link to="/dashboard/favorites" className="btn btn-sm btn-outline mt-4">
+            <Link to="/favorites" className="btn btn-sm btn-outline mt-4">
               View Favorites
             </Link>
           </div>
@@ -308,13 +304,13 @@ const DashboardHome = () => {
       </div>
 
       {/* Recent Activity & Top Performers */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 overflow-scroll">
         {/* Recent Artworks */}
-        <div className="card bg-base-100 shadow-lg">
+        <div className="card bg-base-100 shadow-lg overflow-scroll ">
           <div className="card-body">
             <div className="flex items-center justify-between mb-6">
               <h3 className="card-title text-base-content">Recent Artworks</h3>
-              <Link to="/dashboard/artworks" className="btn btn-sm btn-ghost">
+              <Link to="/explore" className="btn btn-sm btn-ghost">
                 View All
               </Link>
             </div>
