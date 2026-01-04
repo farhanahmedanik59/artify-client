@@ -35,8 +35,8 @@ const DashboardHome = () => {
             name: user.displayName,
             email: user.email,
             joinedDate: "2024-01-15",
-            artworksCount: 24,
-            favoritesCount: 12,
+            artworksCount: 1,
+            favoritesCount: 2,
             recentArts: [
               { id: 1, title: "Sunset Dreams", category: "Digital", likes: 45, views: 120, date: "2024-01-20" },
               { id: 2, title: "Ocean Waves", category: "Traditional", likes: 32, views: 98, date: "2024-01-18" },
@@ -110,7 +110,7 @@ const DashboardHome = () => {
       icon: "👤",
       color: "from-amber-500 to-orange-500",
       path: "/dashboard/profile",
-      action: () => navigate("/dashboard/profile"),
+      action: () => navigate("/dashboard/user-info"),
     },
     {
       title: "Explore Community",
